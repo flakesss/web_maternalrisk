@@ -1,0 +1,56 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Risiko Kesehatan Maternal</title>
+    <!-- Menyertakan Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap">
+    <!-- Menyertakan CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Prediksi Risiko Kesehatan Maternal</h1>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        <form method="post">
+            <label for="age">Usia (tahun):</label>
+            <input type="number" step="any" id="age" name="age" required placeholder="Contoh: 28">
+
+            <label for="systolic_bp">Tekanan Darah Sistolik (mm Hg):</label>
+            <input type="number" step="any" id="systolic_bp" name="systolic_bp" required placeholder="Contoh: 120">
+
+            <label for="diastolic_bp">Tekanan Darah Diastolik (mm Hg):</label>
+            <input type="number" step="any" id="diastolic_bp" name="diastolic_bp" required placeholder="Contoh: 80">
+
+            <label for="bs">Kadar Gula Darah (mmol/L):</label>
+            <input type="number" step="any" id="bs" name="bs" required placeholder="Contoh: 7.0">
+
+            <label for="body_temp">Suhu Tubuh (°F):</label>
+            <input type="number" step="any" id="body_temp" name="body_temp" required placeholder="Contoh: 98.6">
+
+            <label for="heart_rate">Detak Jantung (bpm):</label>
+            <input type="number" step="any" id="heart_rate" name="heart_rate" required placeholder="Contoh: 75">
+
+            <button type="submit">Prediksi Risiko</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result {{ risk_class }}">
+                <h2>Tingkat Risiko yang Diprediksi:</h2>
+                <p class="risk-text">{{ prediction }}</p>
+                <div class="advice">
+                    <h3>Saran:</h3>
+                    <p>{{ advice }}</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <div class="footer">
+        &copy; 2023 Prediktor Kesehatan Maternal
+    </div>
+</body>
+</html>
